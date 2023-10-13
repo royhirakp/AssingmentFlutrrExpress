@@ -8,13 +8,13 @@ const { v4: uuidv4 } = require("uuid");
 // route only of create new book, delete boox, new commnet , comment delete
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const createBlog = await BlogModel.create({
       title: req.body.title,
       author: req.body.author,
       imageUrl: req.body.imageUrl,
       ratting: req.body.ratting,
-      description: req.body.describtion,
+      description: req.body.description,
       comments: [],
       //   user: req.userID || "1234",
     });

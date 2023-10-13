@@ -4,8 +4,7 @@ require("dotenv").config();
 let mongoose = require("mongoose");
 const app = require("./app");
 let port = 3002;
-let mongourl =
-  "mongodb+srv://admin:admin@cluster0.3vq7b6q.mongodb.net/newAssingFlatterr?retryWrites=true&w=majority";
+let mongourl = process.env.mongoUrl;
 
 // process.env.mongo;
 mongoose.set("strictQuery", false);
