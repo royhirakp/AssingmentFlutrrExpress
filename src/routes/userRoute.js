@@ -4,15 +4,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const userModel = require("../models/userModel");
 
-// route.get("/login", async (req, res) => {
-//   try {
-//     let user = await userModel.aggregate([{ $match: {} }]);
-//     res.json(user);
-//   } catch (error) {
-//     res.json(error);
-//   }
-// });
-
 route.post("/singUp", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -27,7 +18,7 @@ route.post("/singUp", async (req, res) => {
           return res.status(500).json({ messege: err.messege });
         }
         // create user
-        let data = await userModel.create({
+        await userModel.create({
           email: email,
           password: hash,
         });

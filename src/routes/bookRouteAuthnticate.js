@@ -1,22 +1,19 @@
 const express = require("express");
-const jsw = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const router = express.Router();
-const BlogModel = require("../models/bookModel");
+const BookModel = require("../models/bookModel");
 const { v4: uuidv4 } = require("uuid");
 
 // route only of create new book, delete boox, new commnet , comment delete
 router.post("/", async (req, res) => {
   try {
-    // console.log(req.body);
-    const createBlog = await BlogModel.create({
+    const createBlog = await BookModel.create({
       title: req.body.title,
       author: req.body.author,
       imageUrl: req.body.imageUrl,
       ratting: req.body.ratting,
       description: req.body.description,
       comments: [],
-      //   user: req.userID || "1234",
+      user: req.userID || "1234",
     });
     res.json({
       createBlog: createBlog,
@@ -35,10 +32,8 @@ router.put("/:id", async (req, res) => {
   try {
     const { name, ratting, comment } = req.body;
     const uniqueId = uuidv4();
-
     const commentObject = { name, ratting, comment, uniqueId };
-
-    const book = await BlogModel.find({ _id: req.params.id });
+    const book = await BookModel.find({ _id: req.params.id });
     let oldComment = book[0].comments;
     oldComment.push(commentObject);
 
@@ -47,10 +42,8 @@ router.put("/:id", async (req, res) => {
         messege: "req body is empty ",
       });
     }
-    console.log("put working22", typeof oldComment);
-    // let data = await BlogModel.updateOne
 
-    let data = await BlogModel.updateOne(
+    let data = await BookModel.updateOne(
       { _id: req.params.id },
       {
         $set: {
@@ -76,7 +69,7 @@ router.put("/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     // console.log(req.userID)
-    let blog = await BlogModel.find();
+    let blog = await BookModel.find();
     res.json({
       status: "susecss",
       blog,
