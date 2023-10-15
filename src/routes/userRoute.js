@@ -36,10 +36,9 @@ route.post("/login", async (req, res) => {
     let userdata = await userModel.findOne({ email });
     if (userdata) {
       let result = await bcrypt.compare(password, userdata.password);
-      console.log("BIRICPT RESULT", result);
+      // console.log("BIRICPT RESULT", result);
       if (result) {
         //token
-        console.log("trueeeeeeeeeeee resulttt");
         const token = jwt.sign(
           {
             exp: Math.floor(Date.now() / 1000) + 60 * 60,
@@ -48,7 +47,6 @@ route.post("/login", async (req, res) => {
           //   process.env.jwtSerectKey,
           "hirak"
         );
-        console.log("TOKEN GENARATED ", token);
         res.json({
           status: "sucesess",
           token,

@@ -28,7 +28,6 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  console.log("put working", req.params.id);
   try {
     const { name, ratting, comment } = req.body;
     const uniqueId = uuidv4();
@@ -68,7 +67,6 @@ router.put("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    // console.log(req.userID)
     let blog = await BookModel.find();
     res.json({
       status: "susecss",

@@ -1,8 +1,6 @@
 const express = require("express");
 const cros = require("cors");
-
 const jsw = require("jsonwebtoken");
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -12,7 +10,7 @@ app.use(cros());
 const userR = require("./src/routes/userRoute");
 const BookRoutsAutintcation = require("./src/routes/bookRouteAuthnticate");
 const Book = require("./src/routes/bookRouteV");
-
+// auth// tokren varifaction
 const tokenVarification = (req, res, next) => {
   if (req.headers.authorization) {
     const token = req.headers.authorization;
@@ -32,9 +30,11 @@ const tokenVarification = (req, res, next) => {
     });
   }
 };
-
+// login and register
 app.use(userR);
+// books and comment post // with auth
 app.use("/bookAuth", tokenVarification, BookRoutsAutintcation);
+//get books list // get single book
 app.use("/book", Book);
 
 module.exports = app;

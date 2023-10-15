@@ -4,7 +4,6 @@ const BookModel = require("../models/bookModel");
 
 router.get("/", async (req, res) => {
   try {
-    // console.log(req.userID)
     let books = await BookModel.find();
     res.json({
       status: "susecss",
@@ -20,7 +19,6 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    // console.log(req.userID)
     let book = await BookModel.find({ _id: req.params.id });
     res.json({
       status: "susecss",
